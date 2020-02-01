@@ -34,6 +34,7 @@ hr {
 
 .btn {
     background-color: var(--c3);
+    color: black;
 }
 
 .btn:hover {

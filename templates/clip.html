@@ -15,36 +15,39 @@
 <body>
     <div class="container">
         <div class="w3-card w3-section w3-padding-large">
-            <div class="w3-jumbo">Clip Board</div>
-            <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
+            <div class="w3-xxxlarge">Clip Board</div>
             <hr>
             <div class="row">
                 <form class="col s12" method="POST" action="/ne">
                     <div class="row">
-                        <div class="input-field col m4 s12">
-                            {{ form.key() }} {{ form.key.label() }}
+                        <div class="input-field col s12">
+                            {{ form.title() }} {{ form.title.label() }}
                         </div>
-                        <div class="input-field col m4 s12">
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {{ form.clip() }} {{ form.clip.label() }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            {{ form.duration() }} {{ form.duration.label() }}
+                        </div>
+                        <div class="input-field col s3">
+                            {{ form.access() }} {{ form.access.label() }}
+                        </div>
+                        <div class="input-field col s3">
+                            {{ form.protected() }} {{ form.protected.label() }}
+                        </div>
+                        <div class="input-field col s3">
                             {{ form.password() }} {{ form.password.label() }}
-                        </div>
-                        <div class="input-field col m2 s6 w3-center">
-                            {{ form.submit(class="waves-effect btn") }}
-                        </div>
-                        <div class="input-field col m2 s6" w3-center>
-                            <a href="/clip" class="waves-effect btn">New</a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="w3-card w3-section w3-padding-large">
-
-        </div>
     </div>
-
-
-
-
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
