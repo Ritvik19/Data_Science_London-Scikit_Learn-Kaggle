@@ -18,29 +18,38 @@
             <div class="w3-xxxlarge">Clip Board</div>
             <hr>
             <div class="row">
-                <form class="col s12" method="POST" action="/ne">
+                <form class="col s12" method="POST" action="/clip">
                     <div class="row">
                         <div class="input-field col s12">
-                            {{ form.title() }} {{ form.title.label() }}
+                            <input id="title" type="text" class="validate" name="title" required>
+                            <label for="title">Title</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            {{ form.clip() }} {{ form.clip.label() }}
+                            <textarea id="clip" class="materialize-textarea" name="clip" required></textarea>
+                            <label for="clip">Clip</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
-                            {{ form.duration() }} {{ form.duration.label() }}
+                            <input type="text" id="datepicker" name="duration" required>
+                            <label for="datepicker">Duration</label>
+                        </div>
+                        <div class="input-field col s2">
+                            <label>
+                                <input type="checkbox" name="private">
+                                <span>Private</span>
+                            </label>
                         </div>
                         <div class="input-field col s3">
-                            {{ form.access() }} {{ form.access.label() }}
+                            <input id="password" type="password" class="validate" name="password">
+                            <label for="password">Password</label>
+                            <span class="helper-text">Optional</span>
                         </div>
-                        <div class="input-field col s3">
-                            {{ form.protected() }} {{ form.protected.label() }}
-                        </div>
-                        <div class="input-field col s3">
-                            {{ form.password() }} {{ form.password.label() }}
+                        <div class="input-field col s4">
+                            <input id="submit" type="submit" value="Done" class="btn">
+                            <input id="delete" type="button" value="Delete" class="btn">
                         </div>
                     </div>
                 </form>
@@ -48,8 +57,10 @@
         </div>
     </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 
 </html>

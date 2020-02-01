@@ -19,16 +19,18 @@
             <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
             <hr>
             <div class="row">
-                <form class="col s12" method="POST" action="/ne">
+                <form class="col s12" method="POST" action="/">
                     <div class="row">
                         <div class="input-field col m4 s12">
-                            {{ form.key() }} {{ form.key.label() }}
+                            <input id="key" type="text" class="validate">
+                            <label for="key">Key</label>
                         </div>
                         <div class="input-field col m4 s12">
-                            {{ form.password() }} {{ form.password.label() }}
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
                         </div>
                         <div class="input-field col m2 s6 w3-center">
-                            {{ form.submit(class="waves-effect btn") }}
+                            <input id="submit" type="submit" value="Done" class="btn">
                         </div>
                         <div class="input-field col m2 s6" w3-center>
                             <a href="/clip" class="waves-effect btn">New</a>
@@ -45,8 +47,9 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 
 </html>

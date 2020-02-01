@@ -15,19 +15,6 @@ body {
     background-color: var(--c2);
 }
 
-.input-field label {
-    color: var(--c4);
-}
-
-.input-field input:focus+label {
-    color: var(--c4) !important;
-}
-
-.input-field input:focus {
-    border-bottom: 1px solid var(--c4) !important;
-    box-shadow: 0 1px 0 0 var(--c4) !important;
-}
-
 hr {
     border-top: 1px solid var(--c4);
 }
