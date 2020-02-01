@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='master.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="w3-card w3-section w3-padding-large">
+            <div class="w3-jumbo">Clip Board</div>
+            <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
+            <hr>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col m4 s12">
+                            <input id="key" type="text" class="validate">
+                            <label for="key">Key</label>
+                        </div>
+                        <div class="input-field col m4 s12">
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="input-field col m2 s6 w3-center">
+                            <input type="submit" value="View" class="waves-effect btn">
+                        </div>
+                        <div class="input-field col m2 s6" w3-center>
+                            <input type="button" value="New" class="waves-effect btn">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="w3-card w3-section w3-padding-large">
+
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>

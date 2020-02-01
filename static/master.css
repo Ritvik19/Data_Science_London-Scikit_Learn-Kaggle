@@ -1,0 +1,41 @@
+:root {
+    --c1: #1b262c;
+    --c2: #0f4c75;
+    --c3: #3282b8;
+    --c4: #ff971d;
+    --c5: #bbe1fa;
+}
+
+body {
+    background-color: var(--c1);
+    color: var(--c4);
+}
+
+.w3-card {
+    background-color: var(--c2);
+}
+
+.input-field label {
+    color: var(--c4);
+}
+
+.input-field input:focus+label {
+    color: var(--c4) !important;
+}
+
+.input-field input:focus {
+    border-bottom: 1px solid var(--c4) !important;
+    box-shadow: 0 1px 0 0 var(--c4) !important;
+}
+
+hr {
+    border-top: 1px solid var(--c4);
+}
+
+.btn {
+    background-color: var(--c3);
+}
+
+.btn:hover {
+    background-color: var(--c5);
+}
