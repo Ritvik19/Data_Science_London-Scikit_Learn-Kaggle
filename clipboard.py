@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request, render_template, url_for
+from flask import request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
@@ -23,18 +23,21 @@ class Clip(db.Model):
         return f''
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home():
-    return render_template('home.html')
+    pnum = request.args.get('page', 1, int)
+    return render_template('home.html', clips=Clip.query.filter_by(private = False).order_by(Clip.uid.desc()).paginate(pnum, 5))
 
 
 @app.route('/clip', methods=['GET', 'POST'])
 def clip():
     if request.form:
-        print(request.form)
-        book = Book(title=request.form.get("title"))
-        db.session.add(book)
+        new_clip = Clip(title=request.form.get("title"), clip=request.form.get("clip"), 
+                        duration=datetime.strptime(request.form.get("duration"), "%b %d, %Y")
+                        , password=request.form.get("password"), private=bool(request.form.get("private", False)))
+        db.session.add(new_clip)
         db.session.commit()
+        return redirect(url_for('home'))
     return render_template('clip.html')
 
 if __name__ == '__main__':

@@ -40,7 +40,26 @@
             </div>
         </div>
         <div class="w3-card w3-section w3-padding-large">
+            <ul class="collection">
+                {% for c in clips.items %}
+                <li class="collection-item">
+                    <table>
+                        <tr>
+                            <td>{{ c.title }}</td>
+                            <td>{{ c.duration }}</td>
+                        </tr>
+                    </table>
+                </li>
+                {% endfor %}
+            </ul>
 
+        </div>
+        <div class="w3-card w3-section w3-padding-large">
+            {% for page in clips.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page %} {% if clips.page == page %}
+            <a href="/?page={{page}}">
+                <i><b>{{page}} </b></i>
+            </a>
+            {% else %} <a href="/?page={{page}}">{{page}}</a> {% endif %} {% else %} ... {% endif %} {% endfor %}
         </div>
     </div>
 

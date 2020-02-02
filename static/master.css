@@ -27,3 +27,9 @@ hr {
 .btn:hover {
     background-color: var(--c5);
 }
+
+.collection,
+.collection-item {
+    background-color: var(--c2) !important;
+    color: var(--c5);
+}
