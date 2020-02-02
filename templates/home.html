@@ -1,79 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='master.css') }}">
-</head>
-
-<body>
-    <div class="container">
-        <div class="w3-card w3-section w3-padding-large top">
-            <div class="w3-jumbo w3-center">Clip Board</div>
-            <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
-            <hr>
+{% extends "layout.html" %} {% block content %}
+<div class="w3-card w3-section w3-padding-large top">
+    <div class="w3-jumbo w3-center">Clip Board</div>
+    <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
+    <hr>
+    <div class="row">
+        <form class="col s12" method="POST" action="/">
             <div class="row">
-                <form class="col s12" method="POST" action="/">
-                    <div class="row">
-                        <div class="input-field col m4 s12">
-                            <input id="key" type="text" class="validate" name="key">
-                            <label for="key">Key</label>
-                        </div>
-                        <div class="input-field col m4 s12">
-                            <input id="password" type="password" class="validate" name="password">
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="input-field col m2 s6 w3-center">
-                            <input id="submit" type="submit" value="View" class="btn">
-                        </div>
-                        <div class="input-field col m2 s6" w3-center>
-                            <a href="/clip" class="waves-effect btn">New</a>
-                        </div>
-                    </div>
-                </form>
+                <div class="input-field col m4 s12">
+                    <input id="key" type="text" class="validate" name="key">
+                    <label for="key">Key</label>
+                </div>
+                <div class="input-field col m4 s12">
+                    <input id="password" type="password" class="validate" name="password">
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field col m2 s6 w3-center">
+                    <input id="submit" type="submit" value="View" class="btn">
+                </div>
+                <div class="input-field col m2 s6" w3-center>
+                    <a href="/clip" class="waves-effect btn">New</a>
+                </div>
             </div>
-        </div>
-        <div class="w3-card w3-section w3-padding-large">
-            <h1 class="w3-center">Public Clips</h1>
-            <table class="collection">
-                {% for c in clips.items %}
-                <a href="/clip?key={{ c.key }}">
-                    <tr class="collection-item">
-                        <td>{{ c.title }}</td>
-                        <td>{{ c.date_posted }}</td>
-                        <td>{{ c.duration }}</td>
-                    </tr>
-                </a>
-                {% endfor %}
-            </table>
-            <ul class="pagination w3-section w3-center">
-                {% for page in clips.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page %} {% if clips.page == page %}
-                <li class="active">
-                    <a href="/?page={{page}}" class>
+        </form>
+    </div>
+</div>
+<div class="w3-card w3-section w3-padding-large">
+    <h1 class="w3-center">Public Clips</h1>
+    <table class="collection">
+        {% for c in clips.items %}
+        <a href="/clip?key={{ c.key }}">
+            <tr class="collection-item">
+                <td>{{ c.title }}</td>
+                <td>{{ c.date_posted }}</td>
+                <td>{{ c.duration }}</td>
+            </tr>
+        </a>
+        {% endfor %}
+    </table>
+    <ul class="pagination w3-section w3-center">
+        {% for page in clips.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page %} {% if clips.page == page %}
+        <li class="active">
+            <a href="/?page={{page}}" class>
                     {{page}}
                 </a>
-                </li>
-                {% else %}
-                <li class="waves-effect">
-                    <a href="/?page={{page}}">{{page}}</a> </li>
-                {% endif %} {% else %} ... {% endif %} {% endfor %}
-            </ul>
-        </div>
-
-    </div>
-
-
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
-</body>
-
-</html>
+        </li>
+        {% else %}
+        <li class="waves-effect">
+            <a href="/?page={{page}}">{{page}}</a> </li>
+        {% endif %} {% else %} ... {% endif %} {% endfor %}
+    </ul>
+</div>
+{% endblock %}

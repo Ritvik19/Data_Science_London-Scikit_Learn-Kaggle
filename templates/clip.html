@@ -1,81 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='master.css') }}">
-</head>
-
-<body>
-    <div class="container">
-        <div class="w3-card w3-section w3-padding-large top">
-            <div class="w3-xxxlarge">Clip Board</div>
-            <hr>
+{% extends "layout.html" %} {% block content %}
+<div class="w3-card w3-section w3-padding-large top">
+    <a href="/">
+        <div><i class="material-icons">arrow_back</i></div>
+    </a>
+    <div class="w3-xxxlarge">Clip Board</div>
+    <hr>
+    <div class="row">
+        <form class="col s12" method="POST" action="/clip">
             <div class="row">
-                <form class="col s12" method="POST" action="/clip">
-                    <div class="row">
-                        <div class="input-field col s4">
-                            <input readonly id="key" type="text" class="validate" name="key" value="{{ key }}">
-                            <label for="key">Key</label>
-                        </div>
-                        <div class="input-field col s8">
-                            {% if data %}
-                            <input id="title" type="text" class="validate" name="title" required value="{{ data['title'] }}"> {% else %}
-                            <input id="title" type="text" class="validate" name="title" required> {% endif %}
-                            <label for="title">Title</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            {% if data %}
-                            <textarea id="clip" class="materialize-textarea" name="clip" required>
+                <div class="input-field col s4">
+                    <input readonly id="key" type="text" class="validate" name="key" value="{{ key }}">
+                    <label for="key">Key</label>
+                </div>
+                <div class="input-field col s8">
+                    {% if data %}
+                    <input id="title" type="text" class="validate" name="title" required value="{{ data['title'] }}"> {% else %}
+                    <input id="title" type="text" class="validate" name="title" required> {% endif %}
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    {% if data %}
+                    <textarea id="clip" class="materialize-textarea" name="clip" required>
                                 {{ data['clip'] }}
                             </textarea> {% else %}
-                            <textarea id="clip" class="materialize-textarea" name="clip" required></textarea> {% endif %}
-                            <label for="clip">Clip</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s3">
-                            {% if data %}
-                            <input type="text" id="datepicker" name="duration" required value="{{ data['duration'] }}"> {% else %}
-                            <input type="text" id="datepicker" name="duration" required> {% endif %}
-                            <label for="datepicker">Duration</label>
-                        </div>
-                        <div class="input-field col s2">
-                            <label>
+                    <textarea id="clip" class="materialize-textarea" name="clip" required></textarea> {% endif %}
+                    <label for="clip">Clip</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s3">
+                    {% if data %}
+                    <input type="text" id="datepicker" name="duration" required value="{{ data['duration'] }}"> {% else %}
+                    <input type="text" id="datepicker" name="duration" required> {% endif %}
+                    <label for="datepicker">Duration</label>
+                </div>
+                <div class="input-field col s2">
+                    <label>
                                 <input type="checkbox" name="private">
                                 <span>Private</span>
                             </label>
-                        </div>
-                        <div class="input-field col s3">
-                            {% if data %}
-                            <input id="password" type="password" class="validate" name="password" value="{{ data['password'] }}"> {% else %}
-                            <input id="password" type="password" class="validate" name="password"> {% endif %}
-                            <label for="password">Password</label>
-                            <span class="helper-text">Optional</span>
-                        </div>
-                        <div class="input-field col s4">
-                            <input id="submit" type="submit" value="Done" class="btn" name="submit">
-                            <input type="reset" name="reset" class="btn">
-                            <input id="submit" type="submit" value="Delete" class="btn" name="submit">
-                        </div>
-                    </div>
-                </form>
+                </div>
+                <div class="input-field col s3">
+                    {% if data %}
+                    <input id="password" type="password" class="validate" name="password" value="{{ data['password'] }}"> {% else %}
+                    <input id="password" type="password" class="validate" name="password"> {% endif %}
+                    <label for="password">Password</label>
+                    <span class="helper-text">Optional</span>
+                </div>
+                <div class="input-field col s4 w3-center">
+                    <input id="submit" type="submit" value="Done" class="btn" name="submit">
+                    <input type="reset" name="reset" class="btn">
+                    <input id="submit" type="submit" value="Delete" class="btn" name="submit">
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
-</body>
-
-</html>
+</div>
+{% endblock %}

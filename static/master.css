@@ -6,6 +6,17 @@
     --c5: #bbe1fa;
 }
 
+*,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+    font-family: 'Girassol', cursive;
+}
+
 body {
     background-color: var(--c1);
     color: var(--c4);
@@ -46,4 +57,20 @@ hr {
 
 .pagination .active {
     background-color: var(--c1) !important;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--c2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--c4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--c4);
 }
