@@ -39,6 +39,6 @@ hr {
     color: var(--c5) !important;
 }
 
-.active {
+.pagination .active {
     background-color: var(--c1) !important;
 }
