@@ -30,12 +30,12 @@ def home():
         print(request.form)
         existing_clip = Clip.query.filter_by(key=request.form.get("key")).first()
         data = {
-            'title': existing_clip.title, 'clip': existing_clip.clip, 'duration': existing_clip.duration,
+            'title': existing_clip.title, 'clip': existing_clip.clip, 'duration': existing_clip.duration.strftime("%b %d, %Y"),
             'password': existing_clip.password
         }
-        return redirect(url_for('clip', key=request.form.get("key"), data=data))
+        return render_template('clip.html', key=request.form.get("key"), data=data)
     pnum = request.args.get('page', 1, int)
-    return render_template('home.html', clips=Clip.query.filter_by(private=False).order_by(Clip.uid.desc()).paginate(pnum, 1))
+    return render_template('home.html', clips=Clip.query.filter_by(private=False).order_by(Clip.uid.desc()).paginate(pnum, 5))
 
 
 @app.route('/clip', methods=['GET', 'POST'])
@@ -50,14 +50,15 @@ def clip():
                             key=request.form.get("key"))
                 db.session.add(new_clip)
             else:
-                Clip.query.filter_by(key=request.form.get("key")).first().update(dict(title=request.form.get("title"),
-                    clip=request.form.get("clip"),
-                    duration=datetime.strptime(request.form.get("duration"), "%b %d, %Y"), 
-                    password=request.form.get("password"), private=bool(request.form.get("private", False)),
-                    key=request.form.get("key")))
+                existing_clip = Clip.query.filter_by(key=request.form.get("key")).first()
+                existing_clip.itle=request.form.get("title")
+                existing_clip.clip=request.form.get("clip")
+                existing_clip.duration=datetime.strptime(request.form.get("duration"), "%b %d, %Y")
+                existing_clip.password=request.form.get("password")
+                existing_clip.private=bool(request.form.get("private", False))
             db.session.commit()
         if request.form.get('submit') == 'Delete':
-            existing_clip = Clip.query.filter(key == request.form.get("key")).first()
+            existing_clip = Clip.query.filter_by(key=request.form.get("key")).first()
             db.session.delete(existing_clip)
             db.session.commit()
         return redirect(url_for('home'))

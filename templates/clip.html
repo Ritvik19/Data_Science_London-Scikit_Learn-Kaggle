@@ -34,7 +34,8 @@
                     <div class="row">
                         <div class="input-field col s12">
                             {% if data %}
-                            <textarea id="clip" class="materialize-textarea" name="clip" required value="{{ data['clip'] }}">
+                            <textarea id="clip" class="materialize-textarea" name="clip" required>
+                                {{ data['clip'] }}
                             </textarea> {% else %}
                             <textarea id="clip" class="materialize-textarea" name="clip" required></textarea> {% endif %}
                             <label for="clip">Clip</label>
