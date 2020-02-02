@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <div class="w3-card w3-section w3-padding-large">
-            <div class="w3-jumbo">Clip Board</div>
+            <div class="w3-jumbo w3-center">Clip Board</div>
             <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
             <hr>
             <div class="row">
@@ -30,7 +30,7 @@
                             <label for="password">Password</label>
                         </div>
                         <div class="input-field col m2 s6 w3-center">
-                            <input id="submit" type="submit" value="Done" class="btn">
+                            <input id="submit" type="submit" value="View" class="btn">
                         </div>
                         <div class="input-field col m2 s6" w3-center>
                             <a href="/clip" class="waves-effect btn">New</a>
@@ -40,27 +40,34 @@
             </div>
         </div>
         <div class="w3-card w3-section w3-padding-large">
+            <h1 class="w3-center">Public Clips</h1>
             <ul class="collection">
                 {% for c in clips.items %}
                 <li class="collection-item">
                     <table>
                         <tr>
                             <td>{{ c.title }}</td>
+                            <td>{{ c.date_posted }}</td>
                             <td>{{ c.duration }}</td>
                         </tr>
                     </table>
                 </li>
                 {% endfor %}
             </ul>
+            <ul class="pagination w3-section w3-center">
+                {% for page in clips.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page %} {% if clips.page == page %}
+                <li class="active">
+                    <a href="/?page={{page}}" class>
+                    {{page}}
+                </a>
+                </li>
+                {% else %}
+                <li class="waves-effect">
+                    <a href="/?page={{page}}">{{page}}</a> </li>
+                {% endif %} {% else %} ... {% endif %} {% endfor %}
+            </ul>
+        </div>
 
-        </div>
-        <div class="w3-card w3-section w3-padding-large">
-            {% for page in clips.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page %} {% if clips.page == page %}
-            <a href="/?page={{page}}">
-                <i><b>{{page}} </b></i>
-            </a>
-            {% else %} <a href="/?page={{page}}">{{page}}</a> {% endif %} {% else %} ... {% endif %} {% endfor %}
-        </div>
     </div>
 
 

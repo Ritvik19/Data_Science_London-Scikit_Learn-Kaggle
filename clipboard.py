@@ -26,7 +26,7 @@ class Clip(db.Model):
 @app.route('/')
 def home():
     pnum = request.args.get('page', 1, int)
-    return render_template('home.html', clips=Clip.query.filter_by(private = False).order_by(Clip.uid.desc()).paginate(pnum, 5))
+    return render_template('home.html', clips=Clip.query.filter_by(private = False).order_by(Clip.uid.desc()).paginate(pnum, 1))
 
 
 @app.route('/clip', methods=['GET', 'POST'])

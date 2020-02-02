@@ -33,3 +33,12 @@ hr {
     background-color: var(--c2) !important;
     color: var(--c5);
 }
+
+.pagination li a,
+.pagination {
+    color: var(--c5) !important;
+}
+
+.active {
+    background-color: var(--c1) !important;
+}
