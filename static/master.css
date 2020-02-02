@@ -11,6 +11,10 @@ body {
     color: var(--c4);
 }
 
+.top {
+    margin-top: 10vh !important;
+}
+
 .w3-card {
     background-color: var(--c2);
 }
@@ -32,6 +36,7 @@ hr {
 .collection-item {
     background-color: var(--c2) !important;
     color: var(--c5);
+    border: 1px solid white !important;
 }
 
 .pagination li a,

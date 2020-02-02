@@ -14,7 +14,7 @@
 
 <body>
     <div class="container">
-        <div class="w3-card w3-section w3-padding-large">
+        <div class="w3-card w3-section w3-padding-large top">
             <div class="w3-jumbo w3-center">Clip Board</div>
             <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
             <hr>
@@ -41,19 +41,17 @@
         </div>
         <div class="w3-card w3-section w3-padding-large">
             <h1 class="w3-center">Public Clips</h1>
-            <ul class="collection">
+            <table class="collection">
                 {% for c in clips.items %}
-                <li class="collection-item">
-                    <table>
-                        <tr>
-                            <td>{{ c.title }}</td>
-                            <td>{{ c.date_posted }}</td>
-                            <td>{{ c.duration }}</td>
-                        </tr>
-                    </table>
-                </li>
+                <a href="/clip?key={{ c.key }}">
+                    <tr class="collection-item">
+                        <td>{{ c.title }}</td>
+                        <td>{{ c.date_posted }}</td>
+                        <td>{{ c.duration }}</td>
+                    </tr>
+                </a>
                 {% endfor %}
-            </ul>
+            </table>
             <ul class="pagination w3-section w3-center">
                 {% for page in clips.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page %} {% if clips.page == page %}
                 <li class="active">

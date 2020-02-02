@@ -62,13 +62,22 @@ def clip():
             db.session.delete(existing_clip)
             db.session.commit()
         return redirect(url_for('home'))
-    try:
-        key = Clip.query.order_by(Clip.uid.desc()).first().uid + 1
-    except Exception as e:
-        print(e)
-        key = 1
-    key = encrypt_md5(key)
-    return render_template('clip.html', key=key)
+    query = request.args.get('key', None)
+    if query:
+        existing_clip = Clip.query.filter_by(key=query).first()
+        data = {
+            'title': existing_clip.title, 'clip': existing_clip.clip, 'duration': existing_clip.duration.strftime("%b %d, %Y"),
+            'password': existing_clip.password
+        }
+        return render_template('clip.html', key=query, data=data)
+    else:
+        try:
+            key = Clip.query.order_by(Clip.uid.desc()).first().uid + 1
+        except Exception as e:
+            print(e)
+            key = 1
+        key = encrypt_md5(key)
+        return render_template('clip.html', key=key)
 
 if __name__ == '__main__':
     app.run(debug=True)
