@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 from datetime import datetime
 import hashlib
@@ -9,6 +11,8 @@ app = Flask(__name__)
 db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = '79e9d3b5d183b6e620e3776f77d95f4b'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+admin = Admin(app)
+# admin.add_view(ModelView(Clip, db.session))
 
 class Clip(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
@@ -20,6 +24,7 @@ class Clip(db.Model):
     password = db.Column(db.String(50), nullable=False)
     key = db.Column(db.String(32), nullable=False)
 
+admin.add_view(ModelView(Clip, db.session))
 encrypt_md5 = lambda x: hashlib.md5(str(x).encode()).hexdigest()
 
 
