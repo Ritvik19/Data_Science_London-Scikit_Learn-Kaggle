@@ -26,17 +26,17 @@
 </div>
 <div class="w3-card w3-section w3-padding-large">
     <h1 class="w3-center">Public Clips</h1>
-    <table class="collection">
+    <div class="collection">
         {% for c in clips.items %}
         <a href="/clip?key={{ c.key }}">
-            <tr class="collection-item">
-                <td>{{ c.title }}</td>
-                <td>{{ c.date_posted }}</td>
-                <td>{{ c.duration }}</td>
-            </tr>
+            <div class="row collection-item">
+                <div class="col s4">{{ c.title }}</div>
+                <div class="col s4">{{ c.date_posted }}</div>
+                <div class="col s4">{{ c.duration }}</div>
+            </div>
         </a>
         {% endfor %}
-    </table>
+    </div>
     <ul class="pagination w3-section w3-center">
         {% for page in clips.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page %} {% if clips.page == page %}
         <li class="active">
