@@ -53,7 +53,7 @@ def clip():
         print(request.form)
         if request.form.get('submit') == 'Done':
             if len(Clip.query.filter_by(key=request.form.get("key")).all()) == 0:
-                new_clip = Clip(title=request.form.get("title"), clip=request.form.get("clip"), 
+                new_clip = Clip(title=request.form.get("title"), clip=request.form.get("clip").strip(), 
                             duration=datetime.strptime(request.form.get("duration"), "%b %d, %Y")
                             , password=encrypt_md5(request.form.get("password")), 
                             private=bool(request.form.get("private", False)),
@@ -62,7 +62,7 @@ def clip():
             else:
                 existing_clip = Clip.query.filter_by(key=request.form.get("key")).first()
                 existing_clip.itle=request.form.get("title")
-                existing_clip.clip=request.form.get("clip")
+                existing_clip.clip=request.form.get("clip").strip()
                 existing_clip.duration=datetime.strptime(request.form.get("duration"), "%b %d, %Y")
                 existing_clip.password = encrypt_md5(request.form.get("password"))
                 existing_clip.private=bool(request.form.get("private", False))
