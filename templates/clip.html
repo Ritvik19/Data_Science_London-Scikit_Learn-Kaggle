@@ -4,6 +4,12 @@
         <div><i class="material-icons">arrow_back</i></div>
     </a>
     <div class="w3-xxxlarge">Clip Board</div>
+    <div class="share-social w3-right-align w3-large">
+        <ion-icon name="copy-outline" class="w3-padding" onclick="copyStringToClipboard('{{ request.host }}/clip?key={{ key }}')"></ion-icon>
+        <a target="_blank" data-action="share/whatsapp/share" href="whatsapp://send?text={{ request.host }}/clip?key={{ key }}">
+            <ion-icon name="logo-whatsapp" class="w3-padding"></ion-icon>
+        </a>
+    </div>
     <hr>
     <div class="row">
         <form class="col s12" method="POST" action="/clip">
@@ -50,7 +56,7 @@
                     <span class="helper-text">Optional</span>
                 </div>
                 <div class="input-field col s4 w3-center">
-                    <input id="submit" type="submit" value="Done" class="btn" name="submit">
+                    <input id="submit" type="submit" value="Done" class="btn" name="submit" onclick="copyStringToClipboard('{{ request.host }}/clip?key={{ key }}')">
                     <input type="reset" name="reset" class="btn">
                     <input id="submit" type="submit" value="Delete" class="btn" name="submit">
                 </div>
@@ -58,4 +64,5 @@
         </form>
     </div>
 </div>
+<div id="snackbar">URL copied!!!</div>
 {% endblock %}

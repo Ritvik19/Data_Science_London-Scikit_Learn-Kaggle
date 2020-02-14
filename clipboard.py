@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-from datetime import datetime
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime, timedelta
 import hashlib
 
 app = Flask(__name__)
@@ -26,6 +27,14 @@ class Clip(db.Model):
 admin.add_view(ModelView(Clip, db.session))
 encrypt_md5 = lambda x: hashlib.md5(str(x).encode()).hexdigest()
 
+def delete_clips():
+    for clip in Clip.query.filter(Clip.duration < datetime.today()-timedelta(days=1)).all():
+        db.session.delete(clip)
+    db.session.commit()
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(delete_clips, 'interval', hours=24)
+sched.start()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
