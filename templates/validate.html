@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block content %}
+<div class="w3-card w3-section w3-padding-large top">
+    <div class="w3-xxxlarge">Clip Board</div>
+    <hr>
+    <h4 class="w3-center">Please enter the password to proceed</h4>
+    <div class="row">
+        <form class="col s12" method="POST" action="/clip">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input readonly id="key" type="text" class="validate" name="key" value="{{ key }}">
+                    <label for="key">Key</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s9">
+                    <input id="password" type="password" class="validate" name="password">
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field col s3 w3-center">
+                    <input id="submit" type="submit" value="Go" class="btn" name="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="snackbar">URL copied!!!</div>
+{% endblock %}

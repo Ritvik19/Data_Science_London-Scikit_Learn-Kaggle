@@ -80,15 +80,22 @@ def clip():
             existing_clip = Clip.query.filter_by(key=request.form.get("key")).first()
             db.session.delete(existing_clip)
             db.session.commit()
+        if request.form.get('submit') == 'Go':
+            key = request.form.get('key')
+            existing_clip = Clip.query.filter_by(key=key).first()
+            print(encrypt_md5(request.form.get('password')))
+            print(existing_clip.password)
+            if encrypt_md5(request.form.get('password')) == existing_clip.password:
+                print('Validated')
+                data = {
+                    'title': existing_clip.title, 'clip': existing_clip.clip, 'duration': existing_clip.duration.strftime("%b %d, %Y"),
+                    'password': ''
+                }
+                return render_template('clip.html', key=request.form.get("key"), data=data)
         return redirect(url_for('home'))
     query = request.args.get('key', None)
-    if query:
-        existing_clip = Clip.query.filter_by(key=query).first()
-        data = {
-            'title': existing_clip.title, 'clip': existing_clip.clip, 'duration': existing_clip.duration.strftime("%b %d, %Y"),
-            'password': existing_clip.password
-        }
-        return render_template('clip.html', key=query, data=data)
+    if query:            
+        return render_template('validate.html', key=query)
     else:
         try:
             key = Clip.query.order_by(Clip.uid.desc()).first().uid + 1
