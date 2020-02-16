@@ -2,7 +2,15 @@
 <div class="w3-card w3-section w3-padding-large top">
     <div class="w3-jumbo w3-center">Clip Board</div>
     <div class="w3-large">Clip board is a Web Application to provide the clip-board facility on the web so that the clips can accessed anytime, anywhere and from any device</div>
-    <hr>
+    <hr> {% with messages = get_flashed_messages() %} {% if messages %}
+    <div class="flashes">
+        {% for message in messages %}
+        <div class="w3-panel w3-red">
+            <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
     <div class="row">
         <form class="col s12" method="POST" action="/">
             <div class="row">

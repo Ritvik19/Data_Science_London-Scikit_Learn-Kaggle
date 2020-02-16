@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request, render_template, url_for, redirect
+from flask import request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -42,16 +42,17 @@ def home():
         print('query')
         print(request.form)
         existing_clip = Clip.query.filter_by(key=request.form.get("key")).first()
-        if encrypt_md5(request.form.get('password')) == existing_clip.password:    
-            data = {
-                'title': existing_clip.title, 'clip': existing_clip.clip, 'duration': existing_clip.duration.strftime("%b %d, %Y"),
-                'password': ''
-            }
-            return render_template('clip.html', key=request.form.get("key"), data=data)
+        if existing_clip is None:
+            flash("Key Not Found")
         else:
-            print(encrypt_md5(request.form.get('password')))
-            print(existing_clip.password)
-            print('Password Error')
+            if encrypt_md5(request.form.get('password')) == existing_clip.password:    
+                data = {
+                    'title': existing_clip.title, 'clip': existing_clip.clip, 'duration': existing_clip.duration.strftime("%b %d, %Y"),
+                    'password': ''
+                }
+                return render_template('clip.html', key=request.form.get("key"), data=data)
+            else:
+                flash("Invalid Password")
     pnum = request.args.get('page', 1, int)
     return render_template('home.html', clips=Clip.query.filter_by(private=False).order_by(Clip.uid.desc()).paginate(pnum, 5))
 
@@ -92,6 +93,8 @@ def clip():
                     'password': ''
                 }
                 return render_template('clip.html', key=request.form.get("key"), data=data)
+            else:
+                flash("Invalid Credentials")
         return redirect(url_for('home'))
     query = request.args.get('key', None)
     if query:            

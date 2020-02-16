@@ -8,4 +8,4 @@ Key Features:
 * User can add a password protection for additional security
 * User can set a duration for the life time of the clip
 * User can share the clips to many social media platforms
-* Password protected admin panel
+* Admin panel
